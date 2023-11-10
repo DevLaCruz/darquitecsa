@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %} | DARQUITECSA </title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  {% load static %}
+  
+  <!-- Favicons -->
+  <!-- <link href="{% static 'core/img/favicon.png' %}" rel="icon">-->
+  <link href="{% static 'core/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'core/lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{% static 'core/lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/lib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'core/css/services.css' %}" rel="stylesheet">
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'core/css/banner.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: EstateAgency
+    Theme URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body class="home-page">
+
+  <div class="click-closed"></div>
+
+  <!--/ Nav Star /-->
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <a class="navbar-brand text-brand" href="{% url 'home' %}">DAR<span class="color-b">QUITECSA</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
+        data-target="#navbarTogglerDemo01" aria-expanded="false">
+        <span class="fa fa-search" aria-hidden="true"></span>
+      </button>
+      <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">Nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/services/' %}active{% endif %}" href="{% url 'services' %}">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/projects/' %}active{% endif %}" href="{% url 'projects' %}">Proyectos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path|slice:":6" == '/blog/' %}active{% endif %}" href="{% url 'blog' %}">Blog</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="{% url 'contact' %}">Contacto</a>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+  <!--/ Nav End /-->
+{% block content %}{% endblock %}
+
+  <!--/ footer Star /-->
+  <section class="section-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-4">
+          <div class="widget-a">
+            <div class="w-header-a">
+              <h3 class="w-title-a text-brand">Darquitecsa</h3>
+            </div>
+            <div class="w-body-a">
+              <p class="w-text-a color-text-a">
+                Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis
+                sed aute irure.
+              </p>
+            </div>
+            <div class="w-footer-a">
+              <ul class="list-unstyled">
+                <li class="color-a">
+                  <span class="color-text-a">Phone .</span> contact@example.com</li>
+                <li class="color-a">
+                  <span class="color-text-a">Email .</span> +51 87654321</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 section-md-t3">
+          <div class="widget-a">
+            <div class="w-header-a">
+              <h3 class="w-title-a text-brand">Páginas de la Empresa</h3>
+            </div>
+            <div class="w-body-a">
+              <div class="w-body-a">
+                <ul class="list-unstyled">
+                 
+                  <li class="item-list-a">
+                    {% load pages_extras %}
+                    {% get_page_list as page_list%}
+                    {% for page in page_list%}
+                    <i class="fa fa-angle-right"></i> <a href="{% url 'page' page.id page.title|slugify %}">{{page.title}}</a>{% if not forloop.last %}<br/>{% endif %}
+                    {% endfor %}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-4 section-md-t3">
+          <div class="widget-a">
+            <div class="w-header-a">
+              <h3 class="w-title-a text-brand">Nuestras Redes Sociales</h3>
+            </div>
+            <div class="w-body-a">
+              <ul class="list-unstyled">
+                {% if LINK_FACEBOOK %}
+                <li class="list-inline-item">
+                  <a href="{{LINK_FACEBOOK}}">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                    <i class="fa fa-angle-right"></i> <a href="#">Facebook</a>
+                  </a>
+                </li>
+              {% endif %}
+                {% if LINK_INSTAGRAM %}
+              <li class="list-inline-item">
+                <a href="{{LINK_INSTAGRAM}}">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                  <i class="fa fa-angle-right"></i> <a href="#">Instagram</a>
+                </a>
+              </li>
+              {% endif %}
+               
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+<!--<div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="socials-a">
+            <ul class="list-inline">
+              {% if LINK_FACEBOOK %}
+                <li class="list-inline-item">
+                  <a href="{{LINK_FACEBOOK}}">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                  </a>
+                </li>
+              {% endif %}
+              {% if LINK_INSTAGRAM %}
+              <li class="list-inline-item">
+                <a href="{{LINK_INSTAGRAM}}">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </li>
+              {% endif %}
+              
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-dribbble" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="copyright-footer">
+            <p class="copyright color-text-a">
+              &copy; Copyright
+              <span class="color-a">DARQUITECSA</span> Todos los Derechos Reservados
+            </p>
+          </div>
+          
+          credits
+
+        </div>
+      </div>
+    </div>--> 
+
+    <!--<div class="credits">
+            
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
+            
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          </div>-->
+  </footer>
+  <!--/ Footer End /-->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <div id="preloader"></div>
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'core/lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'core/lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'core/lib/popper/popper.min.js' %}"></script>
+  <script src="{% static 'core/lib/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'core/lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'core/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'core/lib/scrollreveal/scrollreveal.min.js' %}"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="{% static 'core/contactform/contactform.js' %}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'core/js/main.js' %}"></script>
+
+</body>
+</html>

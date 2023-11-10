@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %} {{page.title}} {% endblock %}
+
+{% load static %}
+{% block content %}
+
+<section class="page-section">
+    <div class="container">
+      <div class="product-item">
+        <div class="product-item-title item-animation">
+          <div class="faded p-5 d-flex mr-auto rounded">
+            <h2 class="section-heading mb-0">
+              <span class="section-heading-lower">{{page.title}}</span>
+            </h2>
+          </div>
+        </div>
+
+        <div class="product-item-description d-flex ml-auto item-animation">
+          <div class="faded p-5 rounded">
+            <p class="mb-0">{{page.content|safe}}</p>
+            {% if user.is_authenticated %}
+              <p><a href="{% url 'admin:pages_page_change' page.id %}">Editar</a></p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  {% endblock %}

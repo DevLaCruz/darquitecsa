@@ -1,0 +1,261 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% load static %}
+{% block content %}
+
+<!--/ Carousel Star /-->
+<div class="intro intro-carousel" style="z-index: -1;">
+  <div id="carousel" class="owl-carousel owl-theme">
+    <div load="lazy" class="carousel-item-a intro-item bg-image"
+      style="background-image: url('{% static 'core/img/banner.jpeg' %}')">
+      <div class="rectangle-1"></div>
+      <div class="rectangle-2"></div>
+      <div class="rectangle-transparent-1"></div>
+      <div class="rectangle-transparent-2"></div>
+      <div class="circle-1"></div>
+      <div class="circle-2"></div>
+      <div class="circle-3"></div>
+      <div class="triangle triangle-1">
+        <img src="{% static 'core/img/obj_triangle.png' %}" alt="">
+      </div>
+      <div class="triangle triangle-2">
+        <img src="{% static 'core/img/obj_triangle.png' %}" alt="">
+      </div>
+      <div class="triangle triangle-3">
+        <img src="{% static 'core/img/obj_triangle.png' %}" alt="">
+      </div>
+      <div class="triangle triangle-4">
+        <img src="{% static 'core/img/obj_triangle.png' %}" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ Carousel end /-->
+
+<!--/ Services Start /-->
+<section class="section-services section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Nuestros Servicios</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="property-carousel" class="owl-carousel owl-theme card-box-c foo">
+
+      {% for service in services %}
+      <div class="carousel-item-b card-header-c d-flex" id="service_{{ service.id }}">
+        <div class="card-box-ico"></div>
+        <div class="card-title-c align-self-center" style="margin-left:-40px;">
+          <h2 class="title-c" style="margin-bottom: 10px;">{{service.title}}</h2>
+          <a href="#service_{{ service.id }}" class="link-c link-icon">Leer más
+            <span class="ion-ios-arrow-forward"></span>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+<!--/ Services End -->
+
+
+ <!--/ Services Start /-->
+<section class="section-services section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Nuestros u´ltimos Proyectos</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="property-carousel2" class="owl-carousel owl-theme card-box-c foo">
+
+      {% for project in projects %}
+      <div class="carousel-item-b card-header-c d-flex">
+        <div class="card-box-a card-shadow">
+          <div class="img-box-a">
+            <img src="{{ project.gallery_images.first.image.url }}" alt="{{ project.title }}" class="img-a img-fluid">
+          </div>
+          <div class="card-overlay">
+            <div class="card-overlay-a-content">
+              <div class="card-header-a">
+                <h2 class="card-title-a">
+                  <a href="{% url 'projects_single' project.id %}">{{ project.title }}</a>
+                </h2>
+              </div>
+              <div class="card-body-a">
+                <a href="{% url 'projects_single' project.id %}" class="link-a">Click here to view
+                  <span class="ion-ios-arrow-forward"></span>
+                </a>
+              </div>
+              <div class="card-footer-a">
+                <ul class="card-info d-flex justify-content-around">
+                  <li>
+                    <h4 class="card-info-title">Categoría</h4>
+                    <span>{{ project.categories.first.name }}</span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title">Publicado el</h4>
+                    <span>{{ project.published|date:"d M" }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+<!--/ Services End -->
+
+<!--/ News Star /-->
+<section class="section-news section-t8">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Nuestras últimas publicaciones</h2>
+          </div>
+          <div class="title-link">
+            <a href="{% url 'blog' %}">Ir al Blog
+              <span class="ion-ios-arrow-forward"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="new-carousel" class="owl-carousel owl-theme">
+      {% for post in recent_posts %}
+      <div class="carousel-item-c">
+        <div class="card-box-b card-shadow news-box">
+          <div class="img-box-b">
+            {% if post.image %}
+            <img src="{{post.image.url}}" alt="" class="img-b img-fluid">
+            {% else %}
+              <p>No hay imagen disponible</p>
+            {% endif %}
+          </div>
+          <div class="card-overlay">
+            <div class="card-header-b">
+              <div class="card-category-b">
+                <em>
+                  {% for category in post.categories.all %}
+                  <a href="{% url 'category' category.id %}" class="category-b">
+                    {{ category.name }}
+                  </a>
+                  {% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                </em>
+              </div>
+              <div class="card-title-b">
+                <h2 class="title-2">
+                  <a href="{% url 'blog_single' post.id %}">{{ post.title }}</a>
+                  <br> new</a>
+                </h2>
+              </div>
+              <div class="card-date">
+                <span class="date-b">{{post.published}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!--/ News End /-->
+
+
+<!--/ Testimonials Star /-->
+<section class="section-testimonials section-t8 nav-arrow-a">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title-wrap d-flex justify-content-between">
+          <div class="title-box">
+            <h2 class="title-a">Testimonials</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="testimonial-carousel" class="owl-carousel owl-arrow">
+      <div class="carousel-item-a">
+        <div class="testimonials-box">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="testimonial-img">
+                <img src="{% static 'core/img/testimonial-1.jpg' %}" alt="" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="testimonial-ico">
+                <span class="ion-ios-quote"></span>
+              </div>
+              <div class="testimonials-content">
+                <p class="testimonial-text">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cupiditate ea nam praesentium
+                  debitis hic ber quibusdam
+                  voluptatibus officia expedita corpori.
+                </p>
+              </div>
+              <div class="testimonial-author-box">
+                <img src="{% static 'core/img/mini-testimonial-1.jpg' %}" alt="" class="testimonial-avatar">
+                <h5 class="testimonial-author">Albert & Erika</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item-a">
+        <div class="testimonials-box">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <div class="testimonial-img">
+                <img src="{% static 'core/img/testimonial-2.jpg' %}" alt="" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="testimonial-ico">
+                <span class="ion-ios-quote"></span>
+              </div>
+              <div class="testimonials-content">
+                <p class="testimonial-text">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, cupiditate ea nam praesentium
+                  debitis hic ber quibusdam
+                  voluptatibus officia expedita corpori.
+                </p>
+              </div>
+              <div class="testimonial-author-box">
+                <img src="{% static 'core/img/mini-testimonial-2.jpg' %}" alt="" class="testimonial-avatar">
+                <h5 class="testimonial-author">Pablo & Emma</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--/ Testimonials End /-->
+
+{% endblock %}
