@@ -11,6 +11,7 @@ django-robots==6.1
 django-seo==0.3.5
 isort==5.12.0
 mccabe==0.7.0
+mysqlclient==2.2.1
 Pillow==10.1.0
 platformdirs==3.11.0
 pylint==3.0.2
