@@ -80,20 +80,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'darquitecsa.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
-        'USER': 'root',
-        'PASSWORD': 'Alejandro1234#',
-        'HOST': '161.132.39.76',
-        'PORT': '3306',  # Puede variar según la configuración
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
